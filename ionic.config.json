@@ -1,6 +1,6 @@
 {
   "name": "ActCut",
-  "app_id": "",
+  "app_id": "36461ab3",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

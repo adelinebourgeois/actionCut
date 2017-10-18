@@ -5,13 +5,15 @@ page-play {
    margin: 80px auto;
  }
   button {
-    background: url("../../assets/img/play_btn.png");
+    background: url("../assets/img/btn_play_final.png");
     display: block;
-    width: 127px;
-    height: 95px;
-    margin: 115px auto;
-    -webkit-animation: breathing 2s ease-out infinite normal;
-    animation: breathing 2s ease-out infinite normal;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
+    margin: 80px auto;
+    -webkit-animation: breathing 1.5s ease-out infinite normal;
+    animation: breathing 1.5s ease-out infinite normal;
   }
   @-webkit-keyframes breathing {
     0% {
@@ -19,14 +21,9 @@ page-play {
       transform: scale(1);
     }
 
-    25% {
-      -webkit-transform: scale(1.2);
-      transform: scale(1.2);
-    }
-
-    60% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
+    50% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
     }
 
     100% {
@@ -42,16 +39,10 @@ page-play {
       transform: scale(1);
     }
 
-    25% {
-      -webkit-transform: scale(1.2);
-      -ms-transform: scale(1.2);
-      transform: scale(1.2);
-    }
-
-    60% {
-      -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-      transform: scale(1);
+    50% {
+      -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+      transform: scale(1.1);
     }
 
     100% {
