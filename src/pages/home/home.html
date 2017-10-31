@@ -6,18 +6,9 @@
     <ion-img class="logo" width="246" height="100" src="assets/img/logo_final.png"></ion-img>
   </div>
   <div id="map">
-    <ul>
-      <li>
-          <p>1</p>
-      </li>
-      <li>
-          <p>2</p>
-      </li>
-      <li>
-          <p>3</p>
-      </li>
-      <li>
-          <p>4</p>
+    <ul *ngIf="levels">
+      <li *ngFor="let level of levels; let i = index" (tap)="showGame(level)" fixed>
+          <p>{{ i + 1 }}</p>
       </li>
     </ul>
   </div>
