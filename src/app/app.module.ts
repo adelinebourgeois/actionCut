@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { Media } from '@ionic-native/media';
+
 // Pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -35,6 +37,7 @@ import {SQLite} from "@ionic-native/sqlite";
   providers: [
     StatusBar,
     SplashScreen,
+    Media,
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
