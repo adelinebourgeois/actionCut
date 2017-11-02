@@ -1,77 +1,54 @@
 page-home {
-    #header-map {
-        position: relative;
-        margin-bottom: 10px;
-        .bloc-life {
-            position: relative;
-            width: 60px;
-            height: 60px;
-            background-image: url('../assets/img/life.png');
-            background-repeat: no-repeat;
-            background-size: 100%;
-            background-position: left;
-            &--number {
-                font-family: "Phosphate";
-                color: color($colors, light, base);
-                font-size: 25px;
-                margin: 0;
-                padding: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translateX(-50%) translateY(-50%);
-            }
+    ion-img {
+        background: none;
+        display: block;
+        margin: 80px auto;
+    }
+    button {
+        background: url("../assets/img/btn_play_final.png");
+        display: block;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 150px;
+        height: 150px;
+        margin: 80px auto;
+        -webkit-animation: breathing 1.5s ease-out infinite normal;
+        animation: breathing 1.5s ease-out infinite normal;
+    }
+    @-webkit-keyframes breathing {
+        0% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
         }
-        ion-img.logo {
-            position:absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background: none;
-            max-width: 100px;
+
+        50% {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
         }
     }
 
-    #map {
-        ul {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            li {
-                position: relative;
-                text-align: center;
-                width: 19%;
-                height: 120px;
-                list-style-type:none;
-                background-image: url('../assets/img/popcorn.png');
-                background-repeat: no-repeat;
-                background-size: 100%;
-                background-position: top;
-                &:not(:first-child),
-                &:not(:last-child) {
-                    margin: 0px 3%;
-                }
-                &:first-child {
-                    margin-right: 3%;
-                }
-                &:last-child {
-                    margin-left: 3%;
-                }
-                p {
-                    margin: 0;
-                    padding: 0;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translateX(-50%) translateY(-50%);
-                    font-family: "Phosphate"!important;
-                    font-size: 45px;
-                    color: color($colors, primary, base);
-                }
-            }
+    @keyframes breathing {
+        0% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+
+        50% {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        100% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
         }
     }
 }

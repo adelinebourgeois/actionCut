@@ -1,15 +1,6 @@
 <ion-content padding>
-  <div id="header-map">
-    <div class="bloc-life">
-      <p class="bloc-life--number">3</p>
+    <div id="home">
+        <ion-img width="246" height="146" src="assets/img/logo_final.png"></ion-img>
+        <button (tap)="showMap()"></button>
     </div>
-    <ion-img class="logo" width="246" height="100" src="assets/img/logo_final.png"></ion-img>
-  </div>
-  <div id="map">
-    <ul *ngIf="levels">
-      <li *ngFor="let level of levels; let i = index" (tap)="showGame(level)" fixed>
-          <p>{{ i + 1 }}</p>
-      </li>
-    </ul>
-  </div>
 </ion-content>

@@ -1,0 +1,15 @@
+<ion-content padding>
+  <div id="header-map">
+    <ion-img class="logo" width="246" height="100" src="assets/img/logo_final.png"></ion-img>
+    <div class="bloc-life">
+      <p class="bloc-life--number">3</p>
+    </div>
+  </div>
+  <ion-grid id="map">
+      <ion-row id="map" *ngIf="levelsId" justify-content-start>
+          <ion-col col-2 *ngFor="let levelId of levelsId; let i = index" (tap)="showGame(levelId)" fixed>
+              <p>{{ i + 1 }}</p>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

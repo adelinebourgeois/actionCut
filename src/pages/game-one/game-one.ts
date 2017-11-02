@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
-import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
+import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 
 const DATABASE_FILE_NAME: string = 'data.db';
 
@@ -10,17 +10,73 @@ const DATABASE_FILE_NAME: string = 'data.db';
 })
 export class GameOnePage {
 
-  levels: string[] = [];
-
   private db: SQLiteObject;
 
-  constructor(public navCtrl: NavController, private sqlite: SQLite, public navParams: NavParams) {
+  levels: string[] = [];
+  question: string = '';
+  reponses: string[] = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite) {
+      this.createDbFile();
       this.levels = navParams.get('level');
-      this.retrieveQuestion();
   }
 
-  public retrieveQuestion() {
-    console.log('this is the question : ' + this.levels);
+  private createDbFile(): void {
+      this.sqlite.create({
+          name: DATABASE_FILE_NAME,
+          location: 'default'
+      })
+      .then((db: SQLiteObject) => {
+          console.log('Create BDD !');
+          this.db = db;
+          this.displayQuestion();
+          this.displayResponses();
+      })
+      .catch(e => console.log(e));
+  }
+
+  public backButton(){
+    this.navCtrl.pop();
+  }
+
+  // display question on game page
+  public displayQuestion() {
+
+      this.db.executeSql('SELECT question FROM `Niveaux` WHERE IdNiveaux ='+this.levels, {})
+          .then((data) => {
+            if(data == null) {
+              return;
+            }
+            if(data.rows) {
+              if(data.rows.length > 0) {
+                for(let i = 0; i < data.rows.length; i++) {
+                  console.log('Question : ' + JSON.stringify(data.rows.item(i)));
+                  this.question = data.rows.item(i).question;
+                }
+              }
+            }
+          })
+          .catch( e => console.log(e));
+  }
+
+  // display the response of the question
+  public displayResponses() {
+
+      this.db.executeSql('SELECT reponse FROM `Reponses` LEFT JOIN `Niveaux` ON Reponses.niveauId = Niveaux.IdNiveaux WHERE Niveaux.IdNiveaux ='+this.levels, {})
+          .then((data) => {
+            if(data == null) {
+              return;
+            }
+            if(data.rows) {
+              if(data.rows.length > 0) {
+                for(let i = 0; i < data.rows.length; i++) {
+                  console.log('Reponses : ' + JSON.stringify(data.rows.item(i)));
+                  this.reponses.push(data.rows.item(i).reponse);
+                }
+              }
+            }
+          })
+          .catch( e => console.log(e));
   }
 
 }

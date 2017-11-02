@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 // Pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { PlayPage } from '../pages/play/play';
+import { MapPage } from '../pages/map/map';
 import { GameOnePage } from '../pages/game-one/game-one';
 
 // Storage
@@ -18,7 +18,7 @@ import {SQLite} from "@ionic-native/sqlite";
   declarations: [
     MyApp,
     HomePage,
-    PlayPage,
+    MapPage,
     GameOnePage,
   ],
   imports: [
@@ -29,7 +29,7 @@ import {SQLite} from "@ionic-native/sqlite";
   entryComponents: [
     MyApp,
     HomePage,
-    PlayPage,
+    MapPage,
     GameOnePage,
   ],
   providers: [
