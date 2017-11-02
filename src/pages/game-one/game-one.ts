@@ -27,9 +27,9 @@ export class GameOnePage {
           location: 'default'
       })
       .then((db: SQLiteObject) => {
-          console.log('Create BDD !');
           this.db = db;
           this.displayQuestion();
+
           this.displayResponses();
       })
       .catch(e => console.log(e));
@@ -61,10 +61,11 @@ export class GameOnePage {
 
   // display the response of the question
   public displayResponses() {
-
-      this.db.executeSql('SELECT reponse FROM `Reponses` LEFT JOIN `Niveaux` ON Reponses.niveauId = Niveaux.IdNiveaux WHERE Niveaux.IdNiveaux ='+this.levels, {})
+      console.log('displayResponses');
+      this.db.executeSql('SELECT reponse, state FROM `Reponses` CROSS JOIN `Niveaux` ON Reponses.niveauId = Niveaux.IdNiveaux WHERE Niveaux.IdNiveaux ='+this.levels, {})
           .then((data) => {
             if(data == null) {
+                console.log('null');
               return;
             }
             if(data.rows) {

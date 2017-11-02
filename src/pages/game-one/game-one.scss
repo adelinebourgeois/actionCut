@@ -43,5 +43,26 @@ page-game-one {
          font-size: 20px;
           
     }
+    ul {
+        list-style: none;
+        margin: 50% auto;
+        padding: 0;
+        width: 85%;
+        li {
+            position: relative;
+            padding: 10px 40px;
+            margin: 0px 10px 10px 0px;
+            border-radius: 10px;
+            font-family: "Phosphate";
+            font-size: 25px;
+            color: #FFF;
+            background-color: color($colors, primary, base);
+            border-bottom: 5px solid #5f231a;
+            text-shadow: 0px -2px #5f231a;
+            text-decoration: none;
+            text-align: center;
+        }
+    }
+
 
 }
