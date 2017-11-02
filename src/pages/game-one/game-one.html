@@ -9,7 +9,7 @@
   <p class="question">{{ question }}</p>
 
   <ul *ngIf="reponses">
-    <li *ngFor="let reponse of reponses" fixed>
+    <li *ngFor="let reponse of reponses" fixed (tap)="answer()">
       {{ reponse }}
     </li>
   </ul>

@@ -80,4 +80,7 @@ export class GameOnePage {
           .catch( e => console.log(e));
   }
 
+  public answer() {
+    console.log('answer');
+  }
 }

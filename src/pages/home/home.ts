@@ -70,10 +70,13 @@ export class HomePage {
         this.db.executeSql('DELETE from `Niveaux`', {})
             .then(() => console.log('Delete content'))
             .catch(e => console.log(e));
-        this.db.executeSql("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='Niveaux' AND NAME='Reponses';", {})
+        this.db.executeSql("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='Niveaux' ", {})
             .then(() => console.log('Delete content'))
             .catch(e => console.log(e));
         this.db.executeSql('DELETE from `Reponses`', {})
+            .then(() => console.log('Delete content'))
+            .catch(e => console.log(e));
+        this.db.executeSql("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='Reponses'", {})
             .then(() => console.log('Delete content'))
             .catch(e => console.log(e));
     }
