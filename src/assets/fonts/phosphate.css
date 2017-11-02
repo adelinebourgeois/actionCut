@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "Phosphate";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Phosphate"),
+  url("../assets/fonts/Phosphate.ttf") format("truetype");
+}

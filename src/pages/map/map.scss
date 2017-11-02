@@ -1,15 +1,15 @@
 page-map {
     #header-map {
         position: relative;
-        margin-bottom: 10px;
         .bloc-life {
+            margin-top:0;
             position: relative;
             float:right;
             width: 60px;
             height: 60px;
             background-image: url('../assets/img/life.png');
             background-repeat: no-repeat;
-            background-size: 100%;
+            background-size: 60px 60px;
             background-position: left;
             &--number {
                 font-family: "Phosphate";
@@ -34,13 +34,15 @@ page-map {
     }
 
     #map {
+        margin-top: 10px;
         ion-col {
-            min-height: 110px;
-            background-image: url('../assets/img/popcorn.png');
-            background-repeat: no-repeat;
-            background-size: 100%;
-            background-position: top;
-            margin: 0 12px;
+            div.bloc-popcorn {
+                height: 100px;
+                background-image: url('../assets/img/popcorn.png');
+                background-repeat: no-repeat;
+                background-size: 100%;
+                background-position: top;
+            }
             p {
                 margin: 0;
                 padding: 0;
@@ -51,12 +53,6 @@ page-map {
                 font-family: "Phosphate" !important;
                 font-size: 45px;
                 color: color($colors, primary, base);
-            }
-            &:first-child {
-                margin: 0 12px 0 0;
-            }
-            &:last-child {
-                margin: 0 0 0 12px;
             }
         }
     }

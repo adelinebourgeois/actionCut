@@ -5,10 +5,12 @@
       <p class="bloc-life--number">3</p>
     </div>
   </div>
-  <ion-grid id="map">
+  <ion-grid>
       <ion-row id="map" *ngIf="levelsId" justify-content-start>
-          <ion-col col-2 *ngFor="let levelId of levelsId; let i = index" (tap)="showGame(levelId)" fixed>
-              <p>{{ i + 1 }}</p>
+          <ion-col col-3 *ngFor="let levelId of levelsId; let i = index" (tap)="showGame(levelId)" fixed>
+              <div class="bloc-popcorn">
+                  <p>{{ i + 1 }}</p>
+              </div>
           </ion-col>
       </ion-row>
   </ion-grid>
