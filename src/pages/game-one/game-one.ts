@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2  } from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
+
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
+import {NativeStorage} from "@ionic-native/native-storage";
+
+import {InfoPage} from "../info/info";
+
 
 const DATABASE_FILE_NAME: string = 'data.db';
 
@@ -9,14 +14,17 @@ const DATABASE_FILE_NAME: string = 'data.db';
   templateUrl: 'game-one.html',
 })
 export class GameOnePage {
+    isGreen: boolean;
 
-  private db: SQLiteObject;
+    private db: SQLiteObject;
 
   levels: string[] = [];
   question: string = '';
-  reponses: string[] = [];
+  reponses: object[] = [];
+  states: string[] = [];
+  target: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite,  private renderer: Renderer2, private nativeStorage: NativeStorage) {
       this.createDbFile();
       this.levels = navParams.get('level');
   }
@@ -71,8 +79,7 @@ export class GameOnePage {
             if(data.rows) {
               if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
-                  console.log('Reponses : ' + JSON.stringify(data.rows.item(i)));
-                  this.reponses.push(data.rows.item(i).reponse);
+                  this.reponses.push({'reponse': data.rows.item(i).reponse, 'state': data.rows.item(i).state});
                 }
               }
             }
@@ -80,7 +87,14 @@ export class GameOnePage {
           .catch( e => console.log(e));
   }
 
-  public answer() {
-    console.log('answer');
+  public answer(event: any) {
+    this.target = event.target;
+    if(this.target.getAttribute('data-state') == 1) {
+        this.renderer.addClass(this.target, 'green');
+        this.navCtrl.push( InfoPage );
+    } else {
+        console.log('false: what happen?!');
+    }
+
   }
 }

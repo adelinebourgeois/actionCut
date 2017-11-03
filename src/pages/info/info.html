@@ -6,11 +6,6 @@
       <p class="bloc-life--number">3</p>
     </div>
   </div>
-  <p class="question">{{ question }}</p>
+  <p class="question">{{ info }}</p>
 
-  <ul *ngIf="reponses">
-    <li *ngFor="let reponse of reponses" fixed (tap)="answer($event)" [attr.data-state]="reponse.state">
-      {{ reponse.reponse }}
-    </li>
-  </ul>
 </ion-content>

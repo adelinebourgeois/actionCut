@@ -11,9 +11,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MapPage } from '../pages/map/map';
 import { GameOnePage } from '../pages/game-one/game-one';
+import { InfoPage } from '../pages/info/info';
 
 // Storage
 import {SQLite} from "@ionic-native/sqlite";
+import {NativeStorage} from "@ionic-native/native-storage";
+
 
 
 @NgModule({
@@ -22,6 +25,7 @@ import {SQLite} from "@ionic-native/sqlite";
     HomePage,
     MapPage,
     GameOnePage,
+    InfoPage
   ],
   imports: [
     BrowserModule,
@@ -33,12 +37,14 @@ import {SQLite} from "@ionic-native/sqlite";
     HomePage,
     MapPage,
     GameOnePage,
+    InfoPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Media,
     SQLite,
+    NativeStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
