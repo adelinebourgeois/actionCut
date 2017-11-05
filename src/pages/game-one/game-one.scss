@@ -1,7 +1,5 @@
 page-game-one {
     #header-game {
-        position: relative;
-        margin-bottom: 50px;
         .bloc-life {
             position: relative;
             float:right;
@@ -22,14 +20,6 @@ page-game-one {
                 left: 50%;
                 transform: translateX(-50%) translateY(-50%);
             }
-        }
-        ion-img.logo {
-            position:absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background: none;
-            max-width: 100px;
         }
     }
     p.question {

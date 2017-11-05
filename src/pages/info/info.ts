@@ -1,6 +1,10 @@
-import { Component, Renderer2  } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
+
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
+import { NativeStorage } from "@ionic-native/native-storage";
+
+import {GameOnePage} from '../game-one/game-one';
 
 const DATABASE_FILE_NAME: string = 'data.db';
 
@@ -11,12 +15,14 @@ const DATABASE_FILE_NAME: string = 'data.db';
 export class InfoPage {
   private db: SQLiteObject;
 
-  levels: string[] = [];
+  levels: number;
   info: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite,  private renderer: Renderer2) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, private nativeStorage: NativeStorage) {
       this.createDbFile();
+      this.getData();
       this.levels = navParams.get('level');
+
   }
 
   private createDbFile(): void {
@@ -31,14 +37,9 @@ export class InfoPage {
       .catch(e => console.log(e));
   }
 
-  public backButton(){
-    this.navCtrl.pop();
-  }
-
   // display info on game page
   public displayInfo() {
-      console.log('displayinfo')
-      this.db.executeSql('SELECT info FROM `Niveaux` WHERE IdNiveaux ='+this.levels, {})
+      this.db.executeSql('SELECT info FROM `Niveaux` WHERE IdNiveaux ='+ this.levels, {})
           .then((data) => {
             if(data == null) {
               return;
@@ -46,7 +47,6 @@ export class InfoPage {
             if(data.rows) {
               if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
-                  console.log('Info : ' + JSON.stringify(data.rows.item(i)));
                   this.info = data.rows.item(i).info;
                 }
               }
@@ -54,5 +54,20 @@ export class InfoPage {
           })
           .catch( e => console.log(e));
   }
+
+  public nextButton() {
+      console.log(this.levels++);
+      this.navCtrl.push( GameOnePage, {
+          level: this.levels++,
+      });
+  }
+
+  public getData() {
+      this.nativeStorage.getItem('levelsDone')
+         .then(
+             data => console.log(data),
+             error => console.error(error)
+         );
+}
 
 }

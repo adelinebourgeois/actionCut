@@ -6,8 +6,8 @@
     </div>
   </div>
   <ion-grid id="map">
-      <ion-row id="map" *ngIf="levelsId" justify-content-start>
-          <ion-col col-2 *ngFor="let levelId of levelsId; let i = index" (tap)="showGame(levelId)" fixed>
+      <ion-row class="map" *ngIf="levelsId" justify-content-start>
+          <ion-col col-2 *ngFor="let levelId of levelsId | reverse ; let i = index" (tap)="showGame(levelId)" fixed>
               <p>{{ i + 1 }}</p>
           </ion-col>
       </ion-row>

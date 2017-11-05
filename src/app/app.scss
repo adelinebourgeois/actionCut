@@ -20,3 +20,16 @@ ion-content {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+
+#header-game {
+  position: relative;
+  margin-bottom: 50px;
+  ion-img.logo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    max-width: 100px;
+  }
+}

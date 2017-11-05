@@ -3,6 +3,7 @@ import { NavController} from 'ionic-angular';
 
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 import { Media, MediaObject } from '@ionic-native/media';
+import { NativeStorage } from "@ionic-native/native-storage";
 
 import { MapPage } from "../map/map";
 
@@ -18,8 +19,9 @@ export class HomePage {
     private file: MediaObject;
 
 
-    constructor(public navCtrl: NavController, private sqlite: SQLite, private media: Media) {
+    constructor(public navCtrl: NavController, private sqlite: SQLite, private media: Media, private nativeStorage: NativeStorage) {
         this.createDbFile();
+        this.getData();
         this.file = this.media.create('./assets/sounds/intro.mp3');
         this.file.play();
     }
@@ -32,7 +34,6 @@ export class HomePage {
             location: 'default'
         })
         .then((db: SQLiteObject) => {
-            console.log('Create BDD !');
             this.db = db;
             this.deleteContent();
             this.createTables();
@@ -45,9 +46,8 @@ export class HomePage {
     private createTables(): void {
         this.db.executeSql('CREATE TABLE IF NOT EXISTS `Niveaux` ( `IdNiveaux` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `status` INTEGER DEFAULT 0, `gameType` INTEGER, `question` TEXT, `info` TEXT )', {})
             .then(() => {
-                console.log('Table Niveaux created');
                 this.db.executeSql('CREATE TABLE IF NOT EXISTS `Reponses` ( `IdReponses` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `reponse` TEXT, `niveauId` INTEGER, `state` INTEGER, FOREIGN KEY(`niveauId`) REFERENCES `Niveaux`(`IdNiveaux`))', {})
-                    .then(() => {console.log('Table Reponses created'); this.insertDb()})
+                    .then(() => this.insertDb())
                     .catch(e => console.log(e));
             })
             .catch( e => console.log(e));
@@ -85,6 +85,14 @@ export class HomePage {
         this.navCtrl.push( MapPage );
         this.file.stop();
         this.file.release();
+    }
+
+    public getData() {
+        this.nativeStorage.getItem('levelsDone')
+            .then(
+                data => console.log(data),
+                error => console.error(error)
+            );
     }
 
 }

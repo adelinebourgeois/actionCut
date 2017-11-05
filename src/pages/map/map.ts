@@ -1,20 +1,24 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
-import { GameOnePage } from "../game-one/game-one";
+
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
+import { NativeStorage } from "@ionic-native/native-storage";
+
+import { GameOnePage } from "../game-one/game-one";
+import {InfoPage} from "../info/info";
 
 const DATABASE_FILE_NAME: string = 'data.db';
 
 @Component({
   selector: 'page-map',
-  templateUrl: 'map.html'
+  templateUrl: 'map.html',
 })
 export class MapPage {
 
     private db: SQLiteObject;
 
-    levelsId: string[] = [];
-    response: string[] = [];
+    levelsId: number[] = [];
+    levelDone: boolean;
 
     constructor(public navCtrl: NavController, private sqlite: SQLite) {
         this.createDbFile();
@@ -26,7 +30,6 @@ export class MapPage {
             location: 'default'
         })
         .then((db: SQLiteObject) => {
-            console.log('Create BDD !');
             this.db = db;
             this.displayLevel();
         })
@@ -43,7 +46,6 @@ export class MapPage {
             if(data.rows) {
               if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
-                  console.log('Niveau Id : ' + JSON.stringify(data.rows.item(i)));
                   this.levelsId.push(data.rows.item(i).IdNiveaux);
                 }
               }
@@ -54,8 +56,8 @@ export class MapPage {
     }
 
     private showGame(levelId){
-      this.navCtrl.push(GameOnePage, {
-          level: levelId,
-      });
+            this.navCtrl.push(GameOnePage, {
+                level: levelId,
+            });
     }
 }
