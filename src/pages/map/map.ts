@@ -78,6 +78,7 @@ export class MapPage {
                 for(let i = 0; i < data.rows.length; i++) {
 
                   this.levelsId.push({levelId: data.rows.item(i).IdNiveaux, status: data.rows.item(i).status });
+                  console.log(this.levelsId);
 
                 }
               }

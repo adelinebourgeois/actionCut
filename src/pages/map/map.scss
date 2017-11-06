@@ -28,12 +28,12 @@ page-map {
         margin-top: 10px;
         ion-col {
             div.bloc-popcorn.able{
-                height: 100%;
-                min-height: 108px;
+                height: 126px;
                 background-image: url('../assets/img/popcorn.png');
                 background-repeat: no-repeat;
                 background-size: 100%;
                 background-position: top;
+                position: relative;
               p {
                 margin: 0;
                 padding: 0;
@@ -47,8 +47,7 @@ page-map {
               }
             }
             div.bloc-popcorn.disable {
-              height: 108px;
-              min-height: 108px;
+              height: 126px;
               background-image: url('../assets/img/popcorn_disable.png');
               background-repeat: no-repeat;
               background-size: 100%;
