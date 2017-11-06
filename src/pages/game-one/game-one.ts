@@ -19,7 +19,7 @@ export class GameOnePage {
   private db: SQLiteObject;
 
 
-  levels: string[] = [];
+  levels: number;
   question: string = '';
   reponses:  Array<{reponse: string, status: number}> = [];
   life: number = 3;
@@ -97,12 +97,19 @@ export class GameOnePage {
           .catch( e => console.log(e));
   }
 
+  public updateStatus () {
+      let levelUp = this.levels;
+      console.log(levelUp + ' : niveau actuel');
+      this.db.executeSql('UPDATE Niveaux SET status = 1 WHERE IdNiveaux ='+ levelUp++, {})
+          .then(() => console.log('UPDATE : ' + levelUp++))
+          .catch(e => console.log(e))
+  }
+
   public getTheAnswer(state, event: any) {
       let target = event.target;
       if(target.getAttribute("data-state") == 1) {
         this.renderer.addClass(target, 'green');
       } else {}
-      this.storeData();
       let theAnswer = {answer: state, idQuestion: this.levels};
       let myAnswer = this.modalCtrl.create(AnswerModalPage, theAnswer);
       myAnswer.onDidDismiss(data => {
