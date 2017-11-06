@@ -21,8 +21,10 @@ page-game-one {
             background-repeat: no-repeat;
             background-size: 100%;
             background-position: right;
+            -webkit-animation: breathing 1.5s ease-out infinite normal;
+            animation: breathing 1.5s ease-out infinite normal;
             &--number {
-                font-family: "Phosphate";
+                font-family: "Phosphate", sans-serif;
                 color: color($colors, light, base);
                 font-size: 25px;
                 margin: 0;
