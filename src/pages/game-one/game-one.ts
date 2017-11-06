@@ -22,10 +22,8 @@ export class GameOnePage {
   levels: string[] = [];
   question: string = '';
   reponses:  Array<{reponse: string, status: number}> = [];
-  states: string[] = [];
   life: number = 3;
   test: string = '';
-  target: any;
   levelDone: boolean;
 
   constructor(private lifeService: LifeService, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private renderer: Renderer2, private nativeStorage: NativeStorage) {
@@ -100,22 +98,16 @@ export class GameOnePage {
   }
 
   public getTheAnswer(state, event: any) {
-      this.target = event.target;
-      if(this.target.getAttribute("data-state") == 1) {
-        this.renderer.addClass(this.target, 'green');
-      } else {
-        console.log('data state est 0');
-      }
+      let target = event.target;
+      if(target.getAttribute("data-state") == 1) {
+        this.renderer.addClass(target, 'green');
+      } else {}
       this.storeData();
       let theAnswer = {answer: state, idQuestion: this.levels};
       let myAnswer = this.modalCtrl.create(AnswerModalPage, theAnswer);
       myAnswer.onDidDismiss(data => {
         this.test = JSON.stringify(data.life);
-        console.log('DATA : ' + this.test);
         this.life = parseFloat(this.test);
-        // this.navCtrl.push( InfoPage, {
-        //     level: this.levels,
-        // });
       });
 
         myAnswer.present();

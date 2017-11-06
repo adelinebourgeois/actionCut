@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { GameOnePage } from "../game-one/game-one";
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
@@ -10,18 +10,18 @@ const DATABASE_FILE_NAME: string = 'data.db';
   selector: 'page-map',
   providers: [LifeService],
   templateUrl: 'map.html',
-  animations: [
-    trigger('levelState', [
-      state('inactive', style({
-        transform: 'scale(1)'
-      })),
-      state('active',   style({
-        transform: 'scale(1.1)'
-      })),
-      transition('inactive => active', animate('100ms ease-in')),
-      transition('active => inactive', animate('100ms ease-out'))
-    ])
-  ]
+  // animations: [
+  //   trigger('levelState', [
+  //     state('inactive', style({
+  //       transform: 'scale(1)'
+  //     })),
+  //     state('active',   style({
+  //       transform: 'scale(1.1)'
+  //     })),
+  //     transition('inactive => active', animate('100ms ease-in')),
+  //     transition('active => inactive', animate('100ms ease-out'))
+  //   ])
+  // ]
 
 })
 
@@ -120,13 +120,11 @@ export class MapPage {
 
                   this.levelsId.push({levelId: data.rows.item(i).IdNiveaux, status: data.rows.item(i).status });
 
-
                 }
               }
             }
           })
           .catch( e => console.log(e));
-
     }
 
     private showGame(levelId, status){
@@ -137,5 +135,4 @@ export class MapPage {
       }
 
     }
-
 }

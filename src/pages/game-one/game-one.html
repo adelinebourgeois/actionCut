@@ -1,14 +1,14 @@
 <ion-content>
   <div id="header-game">
     <ion-icon name="arrow-back" (click)="backButton()"></ion-icon>
-    <ion-img class="logo" width="246" src="assets/img/logo_final.png"></ion-img>
+    <ion-img class="logo" width="246" height="146" src="assets/img/logo_final.png"></ion-img>
     <div class="bloc-life">
       <p class="bloc-life--number">{{ life }}</p>
     </div>
   </div>
   <p class="question">{{ question }}</p>
   <ion-grid *ngIf="reponses">
-      <ion-row justify-content-center *ngFor="let reponse of reponses" fixed (tap)="getTheAnswer(reponse.status, $event)" [attr.data-state]="reponse.state">
+      <ion-row justify-content-center *ngFor="let reponse of reponses" fixed (tap)="getTheAnswer(reponse.status, $event)" [attr.data-state]="reponse.status">
         {{ reponse.reponse }}
       </ion-row>
   </ion-grid>

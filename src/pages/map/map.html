@@ -1,14 +1,14 @@
 <ion-content padding>
   <div id="header-game">
-    <ion-img class="logo" width="246" height="100" src="assets/img/logo_final.png"></ion-img>
+    <ion-img class="logo" width="246" height="146" src="assets/img/logo_final.png"></ion-img>
     <div class="bloc-life">
       <p class="bloc-life--number">{{ life }}</p>
     </div>
   </div>
   <ion-grid>
       <ion-row id="map" *ngIf="levelsId" justify-content-start>
-          <ion-col col-3 *ngFor="let levelId of levelsId | reverse; let i = index" [@levelState]="state" (tap)="toggleState(); showGame(levelId.levelId, levelId.status)" fixed>
-              <div class="bloc-popcorn">
+          <ion-col col-3 *ngFor="let levelId of levelsId | reverse; let i = index" (tap)="toggleState(); showGame(levelId.levelId, levelId.status)" fixed>
+              <div class="bloc-popcorn" [ngClass]="(levelId.status == 0) ? 'disable' : 'able'">
                   <p>{{ levelId.levelId }}</p>
               </div>
           </ion-col>
