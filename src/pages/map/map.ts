@@ -66,19 +66,6 @@ export class MapPage {
         .catch(e => console.log(e));
     }
 
-    // Creation des tables de la base de donnée
-    private createTables(): void {
-        this.db.executeSql('CREATE TABLE IF NOT EXISTS `Niveaux` ( `IdNiveaux` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `status` INTEGER DEFAULT 0, `gameType` INTEGER, `question` TEXT, `info` TEXT )', {})
-            .then(() => {
-                this.db.executeSql('CREATE TABLE IF NOT EXISTS `Reponses` ( `IdReponses` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `reponse` TEXT, `niveauId` INTEGER, `state` INTEGER, FOREIGN KEY(`niveauId`) REFERENCES `Niveaux`(`IdNiveaux`))', {})
-                    .then(() => console.log('before created table reponse'))
-                    .catch(e => console.log(e));
-            })
-            .catch( e => console.log(e));
-    }
-
-
-
     // Affichage des niveaux dans l'écran map
     public displayLevel() {
       this.db.executeSql('SELECT IdNiveaux, status FROM `Niveaux`', {})

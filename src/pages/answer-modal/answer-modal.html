@@ -9,7 +9,7 @@
       </span>
       <!-- (click)="goToMap()" -->
         <span *ngIf="arrow == 'Suivant'; else retourButton">
-            <button class="arrow-map" (tap)="nextButton()" >{{ arrow }} <ion-icon name="md-arrow-round-forward"></ion-icon></button>
+            <button class="arrow-map" (tap)="nextButton(); updateStatus()" >{{ arrow }} <ion-icon name="md-arrow-round-forward"></ion-icon></button>
         </span>
         <ng-template #retourButton><button class="arrow-map" (tap)="goToMap()" >{{ arrow }} <ion-icon name="md-arrow-round-forward"></ion-icon></button></ng-template>
 

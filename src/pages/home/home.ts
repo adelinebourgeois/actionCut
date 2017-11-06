@@ -19,7 +19,7 @@ export class HomePage {
 
     constructor(public navCtrl: NavController, private sqlite: SQLite, private media: Media, private nativeStorage: NativeStorage) {
         // console.log('constructeur');
-        // this.createDbFile();
+        this.createDbFile();
         // this.getData();
         // this.file = this.media.create('./assets/sounds/intro.mp3');
         // this.file.play();
