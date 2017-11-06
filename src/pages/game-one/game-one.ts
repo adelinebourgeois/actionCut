@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { NavController, ModalController, NavParams} from 'ionic-angular';
 import { AnswerModalPage } from "../answer-modal/answer-modal";
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 import { LifeService } from '../shared/life';
+import { NativeStorage } from "@ionic-native/native-storage";
+
+
 import { MapPage } from "../map/map";
 
 const DATABASE_FILE_NAME: string = 'data.db';
@@ -15,15 +18,18 @@ export class GameOnePage {
 
   private db: SQLiteObject;
 
+
   levels: string[] = [];
   question: string = '';
   reponses:  Array<{reponse: string, status: number}> = [];
   states: string[] = [];
   life: number = 3;
   test: string = '';
+  target: any;
+  levelDone: boolean;
 
-  // , public modalCtrl: ModalController
-  constructor(private lifeService: LifeService, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite) {
+  constructor(private lifeService: LifeService, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private renderer: Renderer2, private nativeStorage: NativeStorage) {
+
       this.createDbFile();
       this.levels = navParams.get('level');
       this.life = this.lifeService.get();
@@ -44,15 +50,16 @@ export class GameOnePage {
   }
 
   public backButton(){
+
     this.life = this.lifeService.get();
     this.navCtrl.push(MapPage, {
-        life: this.life
+        life: this.life,
+        levelDone : this.levelDone
     });
   }
 
   // display question on game page
   public displayQuestion() {
-
       this.db.executeSql('SELECT question FROM `Niveaux` WHERE IdNiveaux ='+this.levels, {})
           .then((data) => {
             if(data == null) {
@@ -61,7 +68,6 @@ export class GameOnePage {
             if(data.rows) {
               if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
-                  console.log('Question : ' + JSON.stringify(data.rows.item(i)));
                   this.question = data.rows.item(i).question;
                 }
               }
@@ -72,7 +78,9 @@ export class GameOnePage {
 
   // display the response of the question
   public displayResponses() {
-      this.db.executeSql('SELECT reponse, etat FROM `Reponses` LEFT JOIN `Niveaux` ON Reponses.niveauId = Niveaux.IdNiveaux WHERE Niveaux.IdNiveaux ='+this.levels, {})
+
+      this.db.executeSql('SELECT reponse, state FROM `Reponses` CROSS JOIN `Niveaux` ON Reponses.niveauId=Niveaux.IdNiveaux WHERE Niveaux.IdNiveaux ='+this.levels, {})
+
           .then((data) => {
             console.log(JSON.stringify(data));
             if(data == null) {
@@ -82,8 +90,8 @@ export class GameOnePage {
             if(data.rows) {
               if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
-                  console.log('Reponses : ' + JSON.stringify(data.rows.item(i)));
-                  this.reponses.push({reponse: data.rows.item(i).reponse, status: data.rows.item(i).etat});
+                  this.reponses.push({reponse: data.rows.item(i).reponse, status: data.rows.item(i).state});
+
                 }
               }
             }
@@ -91,14 +99,35 @@ export class GameOnePage {
           .catch( e => console.log(e));
   }
 
-  public getTheAnswer(state) {
-    let theAnswer = {answer: state, idQuestion: this.levels};
-    let myAnswer = this.modalCtrl.create(AnswerModalPage, theAnswer);
-    myAnswer.onDidDismiss(data => {
-      this.test = JSON.stringify(data.life);
-      console.log('DATA : ' + this.test);
-      this.life = parseFloat(this.test);
-    });
-    myAnswer.present();
+  public getTheAnswer(state, event: any) {
+      this.target = event.target;
+      if(this.target.getAttribute("data-state") == 1) {
+        this.renderer.addClass(this.target, 'green');
+      } else {
+        console.log('data state est 0');
+      }
+      this.storeData();
+      let theAnswer = {answer: state, idQuestion: this.levels};
+      let myAnswer = this.modalCtrl.create(AnswerModalPage, theAnswer);
+      myAnswer.onDidDismiss(data => {
+        this.test = JSON.stringify(data.life);
+        console.log('DATA : ' + this.test);
+        this.life = parseFloat(this.test);
+        // this.navCtrl.push( InfoPage, {
+        //     level: this.levels,
+        // });
+      });
+
+        myAnswer.present();
+  }
+
+  public storeData(): void {
+      this.nativeStorage.setItem('levelsDone', {
+          levels: this.levels,
+      })
+       .then(
+          () => console.log('Stored item!'),
+          error => console.error('Error storing item', error)
+       );
   }
 }

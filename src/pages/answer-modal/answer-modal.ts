@@ -3,7 +3,8 @@ import { ViewController, NavController, NavParams } from 'ionic-angular';
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 import { MapPage } from "../map/map";
 import { LifeService } from '../shared/life';
-
+import { NativeStorage } from "@ionic-native/native-storage";
+import { GameOnePage } from '../game-one/game-one';
 
 const DATABASE_FILE_NAME: string = 'data.db';
 
@@ -18,14 +19,13 @@ export class AnswerModalPage {
 
     answer: number = 0;
     status: string = '';
-    levels: string[] = [];
+    levels: number;
     infos: string[] = [];
     tryAgain: string = '';
     arrow: string = '';
     life: number = 3;
 
-    constructor(private lifeService: LifeService, public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private sqlite: SQLite) {
-        console.log('answer', navParams.get('answer'));
+    constructor(private lifeService: LifeService, public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private sqlite: SQLite, private nativeStorage: NativeStorage) {
         this.answer = navParams.get('answer');
         this.levels = navParams.get('idQuestion');
         this.life = this.lifeService.get();
@@ -65,7 +65,6 @@ export class AnswerModalPage {
             if(data.rows) {
               if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
-                  console.log('Infos : ' + JSON.stringify(data.rows.item(i)));
                   this.infos = data.rows.item(i).info;
                 }
               }
@@ -82,11 +81,19 @@ export class AnswerModalPage {
 
     }
 
-    goToNextLevel() {
+    public nextButton() {
+        console.log(this.levels++);
+        this.navCtrl.push( GameOnePage, {
+            level: this.levels++,
+        });
+    }
 
-        // this.navCtrl.push( GameOnePage, {
-        //   level:
-        // } );
+    public getData() {
+        this.nativeStorage.getItem('levelsDone')
+           .then(
+               data => console.log(data),
+               error => console.error(error)
+           );
     }
 
     dismiss() {

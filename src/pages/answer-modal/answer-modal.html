@@ -5,8 +5,9 @@
         <p class="info">{{ infos }}</p>
       </div>
       <span *ngIf="tryAgain !== ''">
-          <button class="try-again" (click)="dismiss()"><ion-icon name="md-undo"></ion-icon> {{ tryAgain }}</button>
+          <button class="try-again" (tap)="dismiss()"><ion-icon name="md-undo"></ion-icon> {{ tryAgain }}</button>
       </span>
-      <button class="arrow-map" (click)="goToMap()">{{ arrow }} <ion-icon name="md-arrow-round-forward"></ion-icon></button>
+      <!-- (click)="goToMap()" -->
+      <button class="arrow-map" (tap)="nextButton()" >{{ arrow }} <ion-icon name="md-arrow-round-forward"></ion-icon></button>
     </div>
 </ion-content>
