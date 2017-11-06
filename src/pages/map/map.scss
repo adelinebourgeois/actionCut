@@ -5,12 +5,13 @@ page-map {
             margin-top:0;
             position: relative;
             float:right;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
+            margin-top: 10px;
             background-image: url('../assets/img/life.png');
             background-repeat: no-repeat;
             background-size: 60px 60px;
-            background-position: left;
+            background-position: right;
             &--number {
                 font-family: "Phosphate";
                 color: color($colors, light, base);
@@ -29,7 +30,7 @@ page-map {
             left: 50%;
             transform: translateX(-50%);
             background: none;
-            max-width: 100px;
+            max-width: 130px;
         }
     }
 
@@ -37,7 +38,8 @@ page-map {
         margin-top: 10px;
         ion-col {
             div.bloc-popcorn {
-                height: 100px;
+                height: 108px;
+                min-height: 108px;
                 background-image: url('../assets/img/popcorn.png');
                 background-repeat: no-repeat;
                 background-size: 100%;
@@ -51,7 +53,7 @@ page-map {
                 left: 50%;
                 transform: translateX(-50%) translateY(-50%);
                 font-family: "Phosphate" !important;
-                font-size: 45px;
+                font-size: 48px;
                 color: color($colors, primary, base);
             }
         }

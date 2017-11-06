@@ -1,16 +1,15 @@
 <ion-content>
   <div id="header-game">
-    <button class="button button-clear ion-arrow-left-c" (click)="backButton()">back</button>
-    <ion-img class="logo" width="246" height="100" src="assets/img/logo_final.png"></ion-img>
+    <ion-icon name="arrow-back" (click)="backButton()"></ion-icon>
+    <ion-img class="logo" width="246" src="assets/img/logo_final.png"></ion-img>
     <div class="bloc-life">
-      <p class="bloc-life--number">3</p>
+      <p class="bloc-life--number">{{ life }}</p>
     </div>
   </div>
   <p class="question">{{ question }}</p>
-
-  <ul *ngIf="reponses">
-    <li *ngFor="let reponse of reponses" fixed (tap)="answer()">
-      {{ reponse }}
-    </li>
-  </ul>
+  <ion-grid *ngIf="reponses">
+      <ion-row justify-content-center *ngFor="let reponse of reponses" fixed (tap)="getTheAnswer(reponse.status)">
+        {{ reponse.reponse }}
+      </ion-row>
+  </ion-grid>
 </ion-content>

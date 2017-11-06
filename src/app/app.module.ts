@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { LifeService } from '../pages/shared/life';
 
 import { Media } from '@ionic-native/media';
 
@@ -11,6 +13,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MapPage } from '../pages/map/map';
 import { GameOnePage } from '../pages/game-one/game-one';
+import { AnswerModalPage } from '../pages/answer-modal/answer-modal';
 
 // Storage
 import {SQLite} from "@ionic-native/sqlite";
@@ -22,9 +25,11 @@ import {SQLite} from "@ionic-native/sqlite";
     HomePage,
     MapPage,
     GameOnePage,
+    AnswerModalPage
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -33,12 +38,14 @@ import {SQLite} from "@ionic-native/sqlite";
     HomePage,
     MapPage,
     GameOnePage,
+    AnswerModalPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Media,
     SQLite,
+    LifeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

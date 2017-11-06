@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "Futura";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Futura"),
+  url("../fonts/Futura.ttf") format("truetype");
+}

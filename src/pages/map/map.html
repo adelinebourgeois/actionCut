@@ -2,12 +2,12 @@
   <div id="header-map">
     <ion-img class="logo" width="246" height="100" src="assets/img/logo_final.png"></ion-img>
     <div class="bloc-life">
-      <p class="bloc-life--number">3</p>
+      <p class="bloc-life--number">{{ life }}</p>
     </div>
   </div>
   <ion-grid>
       <ion-row id="map" *ngIf="levelsId" justify-content-start>
-          <ion-col col-3 *ngFor="let levelId of levelsId; let i = index" (tap)="showGame(levelId)" fixed>
+          <ion-col col-3 *ngFor="let levelId of levelsId; let i = index" [@levelState]="state" (tap)="toggleState(); showGame(levelId.levelId, levelId.status)" fixed>
               <div class="bloc-popcorn">
                   <p>{{ i + 1 }}</p>
               </div>

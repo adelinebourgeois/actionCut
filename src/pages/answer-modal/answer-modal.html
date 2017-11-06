@@ -1,0 +1,12 @@
+<ion-content class="answer-modal-page">
+    <div class="wrapper-content">
+      <div class="answer-content">
+        <p class="status">{{ status }}</p>
+        <p class="info">{{ infos }}</p>
+      </div>
+      <span *ngIf="tryAgain !== ''">
+          <button class="try-again" (click)="dismiss()"><ion-icon name="md-undo"></ion-icon> {{ tryAgain }}</button>
+      </span>
+      <button class="arrow-map" (click)="goToMap()">{{ arrow }} <ion-icon name="md-arrow-round-forward"></ion-icon></button>
+    </div>
+</ion-content>
