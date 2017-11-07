@@ -1,13 +1,13 @@
 <ion-content class="answer-modal-page">
     <div class="wrapper-content">
-      <div class="answer-content">
-        <p class="status">{{ status }}</p>
-        <p class="info">{{ infos }}</p>
-      </div>
-      <span *ngIf="tryAgain !== ''">
+        <div class="answer-content">
+            <p class="status">{{ status }}</p>
+            <p class="info">{{ infos }}</p>
+        </div>
+        <span *ngIf="tryAgain !== ''">
           <button class="try-again" (tap)="dismiss()"><ion-icon name="md-undo"></ion-icon> {{ tryAgain }}</button>
       </span>
-      <!-- (click)="goToMap()" -->
+        <!-- (click)="goToMap()" -->
         <span *ngIf="arrow == 'Suivant'; else retourButton">
             <button class="arrow-map" (tap)="nextButton()" >{{ arrow }} <ion-icon name="md-arrow-round-forward"></ion-icon></button>
         </span>

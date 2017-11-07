@@ -8,9 +8,9 @@
   </div>
   <p class="question">{{ question }}</p>
   <ion-grid *ngIf="reponses">
-      <ion-row justify-content-center *ngFor="let reponse of reponses" fixed (tap)="getTheAnswer(reponse.status, $event)" [attr.data-state]="reponse.status">
-        {{ reponse.reponse }}
-      </ion-row>
+    <ion-row justify-content-center *ngFor="let reponse of reponses" fixed (tap)="getTheAnswer(reponse.status, $event)" [attr.data-state]="reponse.status">
+      {{ reponse.reponse }}
+    </ion-row>
   </ion-grid>
 
 </ion-content>

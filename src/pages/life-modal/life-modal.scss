@@ -1,4 +1,4 @@
-page-answer-modal {
+page-life-modal {
     .answer-modal-page {
         // padding: 25% 0px 25% 0px !important;
         display: flex;
@@ -19,47 +19,27 @@ page-answer-modal {
             min-height: 300px;
             padding: 30px;
             margin: auto;
-            button.arrow-map {
-                position: absolute;
-                bottom: 100px;
-                right: 30px;
-                font-size: 20px;
-                font-family: "Phosphate";
-                color: color($colors, primary, base);
-                ion-icon {
-                    font-size: 20px;
-                    vertical-align: bottom;
-                }
-            }
-            button.try-again {
-                position: absolute;
-                bottom: 100px;
-                left: 30px;
-                font-size: 20px;
-                font-family: "Phosphate";
-                color: color($colors, primary, base);
-                ion-icon {
-                    font-size: 20px;
-                    vertical-align: bottom;
-                }
-            }
-            .answer-content {
+            .life-content {
                 position: relative;
                 top: 55%;
                 left: 50%;
                 transform: translateY(-50%) translateX(-50%);
-
                 p.status {
                     font-family: "Phosphate";
                     font-size: 35px;
                     text-align: center;
                     color: color($colors, primary, base);
                 }
-                p.info {
-                    font-family: 'Futura';
-                    font-size: 18px;
-                    margin-top: 10px;
-                    line-height: 1.2em;
+            }
+            button {
+                position: absolute;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                ion-icon {
+                    color: #3b5998;
+                    font-size: 50px;
+                    vertical-align: bottom;
                 }
             }
         }

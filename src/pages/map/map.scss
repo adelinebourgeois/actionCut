@@ -1,62 +1,37 @@
 page-map {
-    #header-game {
-        .bloc-life {
-          margin-top:0;
-          position: relative;
-          float:right;
-          width: 55px;
-          height: 55px;
-          background-image: url('../assets/img/life.png');
-          background-repeat: no-repeat;
-          background-size: 60px 60px;
-          background-position: right;
-          &--number {
-              font-family: "Phosphate", sans-serif;
-              color: color($colors, light, base);
-              font-size: 25px;
-              margin: 0;
-              padding: 0;
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translateX(-50%) translateY(-50%);
-          }
-      }
-    }
-
-    #map {
-        margin-top: 10px;
-        ion-col {
-            div.bloc-popcorn.able{
-                height: 126px;
-                background-image: url('../assets/img/popcorn.png');
-                background-repeat: no-repeat;
-                background-size: 100%;
-                background-position: top;
-                position: relative;
-              p {
-                margin: 0;
-                padding: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translateX(-50%) translateY(-50%);
-                font-family: "Phosphate", sans-serif !important;
-                font-size: 48px;
-                color: color($colors, primary, base);
-              }
-            }
-            div.bloc-popcorn.disable {
-              height: 126px;
-              background-image: url('../assets/img/popcorn_disable.png');
-              background-repeat: no-repeat;
-              background-size: 100%;
-              background-position: top;
-              p {
-                display: none;
-              }
-            }
-
+  #map {
+    margin-top: 10px;
+    ion-col {
+      div.bloc-popcorn.able{
+        height: 126px;
+        background-image: url('../assets/img/popcorn.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: top;
+        position: relative;
+        p {
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          top: 58%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          font-family: "Phosphate", sans-serif !important;
+          font-size: 48px;
+          color: color($colors, primary, base);
         }
+      }
+      div.bloc-popcorn.disable {
+        height: 126px;
+        background-image: url('../assets/img/popcorn_disable.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: top;
+        p {
+          display: none;
+        }
+      }
+
     }
+  }
 }
