@@ -4,40 +4,15 @@ page-game-one {
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
-        // margin-bottom: 50px;
         ion-icon {
             font-size: 30px;
             color: color($colors, light, base);
             width: 60px;
             padding: 20px 10px;
         }
-        .bloc-life {
-            position: relative;
-            width: 55px;
-            height: 55px;
-            margin-top: 10px;
-            background-image: url('../assets/img/life.png');
-            background-repeat: no-repeat;
-            background-size: 100%;
-            background-position: right;
-            -webkit-animation: breathing 1.5s ease-out infinite normal;
-            animation: breathing 1.5s ease-out infinite normal;
-            &--number {
-                font-family: "Phosphate", sans-serif;
-                color: color($colors, light, base);
-                font-size: 25px;
-                margin: 0;
-                padding: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translateX(-50%) translateY(-50%);
-            }
-        }
-
     }
     p.question {
-        font-family: "Phosphate";
+        font-family: "Phosphate", sans-serif;
         background-color: color($colors, light, base);
         width: 100vw;
         color: color($colors, primary, base);
@@ -60,7 +35,7 @@ page-game-one {
             padding: 10px;
             margin: 10px;
             border-radius: 10px;
-            font-family: "Phosphate";
+            font-family: "Phosphate", sans-serif;;
             font-size: 25px;
             color: color($colors, light, base);
             background-color: color($colors, primary, base);

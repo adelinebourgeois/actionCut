@@ -33,6 +33,30 @@ ion-content {
     background: none;
     max-width: 100px;
   }
+  .bloc-life {
+    margin-top:0;
+    position: relative;
+    float:right;
+    width: 55px;
+    height: 55px;
+    background-image: url('../assets/img/life.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-position: right;
+    -webkit-animation: breathing 1.5s ease-out infinite normal;
+    animation: breathing 1.5s ease-out infinite normal;
+    &--number {
+      font-family: "Phosphate", sans-serif;
+      color: color($colors, light, base);
+      font-size: 25px;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 49%;
+      left: 48%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
   
 }
 

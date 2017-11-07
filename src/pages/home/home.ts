@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
+
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
-import { Media, MediaObject } from '@ionic-native/media';
 import { NativeStorage } from "@ionic-native/native-storage";
 
 import { MapPage } from "../map/map";
@@ -15,12 +15,11 @@ const DATABASE_FILE_NAME: string = 'data.db';
 export class HomePage {
 
     private db: SQLiteObject;
-    private file: MediaObject;
 
     public isChecked: boolean = false;
 
 
-    constructor(public navCtrl: NavController, private sqlite: SQLite, private media: Media, private nativeStorage: NativeStorage) {
+    constructor(public navCtrl: NavController, private sqlite: SQLite, private nativeStorage: NativeStorage) {
         this.createDbFile();
     }
 

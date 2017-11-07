@@ -6,17 +6,17 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 //Native Ionic
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { LifeService } from '../pages/shared/life';
-
 import { Media } from '@ionic-native/media';
+import { Vibration } from '@ionic-native/vibration';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 // Pages
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MapPage } from '../pages/map/map';
 import { GameOnePage } from '../pages/game-one/game-one';
-
+import {LifeModalPage} from "../pages/life-modal/life-modal";
 import { AnswerModalPage } from '../pages/answer-modal/answer-modal';
 
 
@@ -24,7 +24,6 @@ import { AnswerModalPage } from '../pages/answer-modal/answer-modal';
 import {SQLite} from "@ionic-native/sqlite";
 import {NativeStorage} from "@ionic-native/native-storage";
 
-import { ReversePipe } from "../pages/shared/pipes/reverse.pipe";
 
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ import { ReversePipe } from "../pages/shared/pipes/reverse.pipe";
     MapPage,
     GameOnePage,
     AnswerModalPage,
-    ReversePipe,
+    LifeModalPage,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +45,8 @@ import { ReversePipe } from "../pages/shared/pipes/reverse.pipe";
     HomePage,
     MapPage,
     GameOnePage,
-    AnswerModalPage
+    AnswerModalPage,
+    LifeModalPage
   ],
   providers: [
     StatusBar,
@@ -55,6 +55,8 @@ import { ReversePipe } from "../pages/shared/pipes/reverse.pipe";
     SQLite,
     LifeService,
     NativeStorage,
+    Vibration,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

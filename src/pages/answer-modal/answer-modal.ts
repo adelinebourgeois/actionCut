@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { ViewController, NavController, NavParams } from 'ionic-angular';
+
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
-import { MapPage } from "../map/map";
-import { LifeService } from '../shared/life';
 import { NativeStorage } from "@ionic-native/native-storage";
+
+import { LifeService } from '../shared/life';
 import { GameOnePage } from '../game-one/game-one';
+import { MapPage } from "../map/map";
 
 const DATABASE_FILE_NAME: string = 'data.db';
 
@@ -15,6 +17,7 @@ const DATABASE_FILE_NAME: string = 'data.db';
 
 export class AnswerModalPage {
 
+
     private db: SQLiteObject;
 
     answer: number = 0;
@@ -24,6 +27,7 @@ export class AnswerModalPage {
     tryAgain: string = '';
     arrow: string = '';
     life: number = 3;
+    lifeUp: number;
 
     constructor(private lifeService: LifeService, public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private sqlite: SQLite, private nativeStorage: NativeStorage) {
         this.answer = navParams.get('answer');
@@ -42,6 +46,13 @@ export class AnswerModalPage {
           this.status = 'YES, ACTION';
           this.createDbFile();
           this.arrow = 'Suivant';
+        }
+        if(this.life === 0) {
+            this.navCtrl.push(MapPage);
+            setInterval(() => {
+                this.lifeService.increment();
+                console.log('increment');
+            }, 1000)
         }
     }
 
@@ -98,19 +109,18 @@ export class AnswerModalPage {
         });
     }
 
-    public getData() {
-        this.nativeStorage.getItem('levelsDone')
-           .then(
-               data => console.log(data),
-               error => console.error(error)
-           );
-    }
-
     dismiss() {
       this.life = this.lifeService.get();
       let data = {life : this.life};
       this.viewCtrl.dismiss(data);
-    }
+        if(this.life === 0) {
+            this.navCtrl.push(MapPage,
+                {
 
+                    life: this.life,
+                }
+            );
+        }
+    }
 
 }

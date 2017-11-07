@@ -1,12 +1,13 @@
-import { Component, Renderer2 } from '@angular/core';
+import {Component, Renderer2} from '@angular/core';
 import { NavController, ModalController, NavParams} from 'ionic-angular';
-import { AnswerModalPage } from "../answer-modal/answer-modal";
+
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
+import { Vibration } from "@ionic-native/vibration";
+
+import { AnswerModalPage } from "../answer-modal/answer-modal";
 import { LifeService } from '../shared/life';
-import { NativeStorage } from "@ionic-native/native-storage";
-
-
 import { MapPage } from "../map/map";
+
 
 const DATABASE_FILE_NAME: string = 'data.db';
 
@@ -24,9 +25,8 @@ export class GameOnePage {
   reponses:  Array<{reponse: string, status: number}> = [];
   life: number = 3;
   test: string = '';
-  levelDone: boolean;
 
-  constructor(private lifeService: LifeService, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private renderer: Renderer2, private nativeStorage: NativeStorage) {
+  constructor(private lifeService: LifeService, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private renderer: Renderer2, private vibration: Vibration) {
 
       this.createDbFile();
       this.levels = navParams.get('level');
@@ -52,7 +52,6 @@ export class GameOnePage {
     this.life = this.lifeService.get();
     this.navCtrl.push(MapPage, {
         life: this.life,
-        levelDone : this.levelDone
     });
   }
 
@@ -102,7 +101,9 @@ export class GameOnePage {
       let target = event.target;
       if(target.getAttribute("data-state") == 1) {
         this.renderer.addClass(target, 'green');
-      } else {}
+      } else {
+          this.vibration.vibrate(1000);
+      }
       let theAnswer = {answer: state, idQuestion: this.levels};
       let myAnswer = this.modalCtrl.create(AnswerModalPage, theAnswer);
       myAnswer.onDidDismiss(data => {
@@ -111,15 +112,5 @@ export class GameOnePage {
       });
 
         myAnswer.present();
-  }
-
-  public storeData(): void {
-      this.nativeStorage.setItem('levelsDone', {
-          levels: this.levels,
-      })
-       .then(
-          () => console.log('Stored item!'),
-          error => console.error('Error storing item', error)
-       );
   }
 }
