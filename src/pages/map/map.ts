@@ -39,7 +39,6 @@ export class MapPage {
     constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private lifeService: LifeService) {
         this.createDbFile();
         this.isLife = navParams.get('life');
-        console.log('IsLife : ' + this.isLife);
         if(this.isLife != undefined) {
           this.life = this.isLife;
         } else {
@@ -77,6 +76,7 @@ export class MapPage {
               if(data.rows.length > 0) {
                 for(let i = 0; i < data.rows.length; i++) {
                   this.levelsId.push({levelId: data.rows.item(i).IdNiveaux, status: data.rows.item(i).status });
+                  console.log(this.levelsId);
 
                 }
               }

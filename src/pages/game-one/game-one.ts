@@ -27,9 +27,9 @@ export class GameOnePage {
   levelDone: boolean;
 
   constructor(private lifeService: LifeService, public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private renderer: Renderer2, private nativeStorage: NativeStorage) {
-
       this.createDbFile();
       this.levels = navParams.get('level');
+      console.log('Level du game : ' + this.levels);
       this.life = this.lifeService.get();
 
   }
@@ -52,7 +52,6 @@ export class GameOnePage {
     this.life = this.lifeService.get();
     this.navCtrl.push(MapPage, {
         life: this.life,
-        levelDone : this.levelDone
     });
   }
 
@@ -80,7 +79,6 @@ export class GameOnePage {
       this.db.executeSql('SELECT reponse, state FROM `Reponses` CROSS JOIN `Niveaux` ON Reponses.niveauId=Niveaux.IdNiveaux WHERE Niveaux.IdNiveaux ='+this.levels, {})
 
           .then((data) => {
-            console.log(JSON.stringify(data));
             if(data == null) {
                 console.log('null');
               return;
@@ -97,12 +95,22 @@ export class GameOnePage {
           .catch( e => console.log(e));
   }
 
+    public updateStatus () {
+        let levelUp = this.levels;
+        console.log('LEVEL dans update status : ' + levelUp);
+        this.db.executeSql('UPDATE Niveaux SET status = 1 WHERE IdNiveaux ='+ levelUp++, {})
+            .then(() => console.log('UPDATE : ' + levelUp++ + ' car j\'ai fait le level ' + this.levels ))
+            .catch(e => console.log(e))
+    }
+
   public getTheAnswer(state, event: any) {
       let target = event.target;
       if(target.getAttribute("data-state") == 1) {
         this.renderer.addClass(target, 'green');
+        this.levelDone = true;
       } else {}
-      let theAnswer = {answer: state, idQuestion: this.levels};
+      this.updateStatus();
+      let theAnswer = {answer: state, idQuestion: this.levels, levelDone: this.levelDone};
       let myAnswer = this.modalCtrl.create(AnswerModalPage, theAnswer);
       myAnswer.onDidDismiss(data => {
         this.test = JSON.stringify(data.life);

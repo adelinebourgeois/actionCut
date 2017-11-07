@@ -18,7 +18,6 @@ export class HomePage {
     private file: MediaObject;
 
     constructor(public navCtrl: NavController, private sqlite: SQLite, private media: Media, private nativeStorage: NativeStorage) {
-        // console.log('constructeur');
         this.createDbFile();
         // this.getData();
         // this.file = this.media.create('./assets/sounds/intro.mp3');
@@ -35,7 +34,6 @@ export class HomePage {
         .then((db: SQLiteObject) => {
             this.db = db;
             this.deleteContent();
-            console.log('do the createTable');
             this.createTables();
 
         })

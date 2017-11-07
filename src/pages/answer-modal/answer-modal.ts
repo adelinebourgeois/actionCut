@@ -28,7 +28,7 @@ export class AnswerModalPage {
     constructor(private lifeService: LifeService, public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private sqlite: SQLite, private nativeStorage: NativeStorage) {
         this.answer = navParams.get('answer');
         this.levels = navParams.get('idQuestion');
-        console.log('construct idniveau :' + this.levels);
+        console.log('modal idniveau :' + this.levels);
         this.life = this.lifeService.get();
 
         if(this.answer === 0) {
@@ -74,12 +74,6 @@ export class AnswerModalPage {
           .catch( e => console.log(e));
     }
 
-    public updateStatus () {
-        this.db.executeSql('UPDATE Niveaux SET status = 1 WHERE IdNiveaux ='+ this.levels++, {})
-            .then(() => console.log('UPDATE : ' + this.levels++ + 'car j\'ai fait le level ' + this.levels ))
-            .catch(e => console.log(e))
-    }
-
     goToMap() {
       this.life = this.lifeService.get();
       this.navCtrl.push( MapPage, {
@@ -89,10 +83,8 @@ export class AnswerModalPage {
     }
 
     public nextButton() {
-        this.updateStatus();
-        console.log('Je passe au niveau suivant : ' + this.levels++ + ' car j\'ai terminé le niveau ' + this.levels);
         this.navCtrl.push( GameOnePage, {
-            level: this.levels++,
+            level: this.levels + 1,
         });
     }
 
