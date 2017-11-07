@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
-import { GameOnePage } from "../game-one/game-one";
+
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
+import {NativeStorage} from "@ionic-native/native-storage";
+
+import { GameOnePage } from "../game-one/game-one";
 import { LifeService } from '../shared/life';
-import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
+
 const DATABASE_FILE_NAME: string = 'data.db';
 
 @Component({
@@ -30,25 +33,20 @@ export class MapPage {
     private db: SQLiteObject;
 
     levelsId: Array<{levelId: string, status: number}> = [];
-    response: string[] = [];
     life: number = 3;
     isLife: number;
     state: string = 'inactive';
-    levelDone: boolean;
+    checkedValue: boolean = true;
 
-    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private lifeService: LifeService) {
+    constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, private sqlite: SQLite, private lifeService: LifeService, private nativeStorage: NativeStorage) {
         this.createDbFile();
         this.isLife = navParams.get('life');
-        console.log('IsLife : ' + this.isLife);
         if(this.isLife != undefined) {
           this.life = this.isLife;
         } else {
           this.life = this.lifeService.get();
         }
-    }
 
-    toggleState() {
-      this.state = this.state === 'active' ? 'inactive' : 'active';
     }
 
     private createDbFile(): void {
@@ -58,9 +56,6 @@ export class MapPage {
         })
         .then((db: SQLiteObject) => {
             this.db = db;
-            // this.deleteContent();
-            // this.createTables();
-            // this.insertDb();
             this.displayLevel();
         })
         .catch(e => console.log(e));
@@ -68,6 +63,7 @@ export class MapPage {
 
     // Affichage des niveaux dans l'écran map
     public displayLevel() {
+      this.levelsId = [];
       this.db.executeSql('SELECT IdNiveaux, status FROM `Niveaux`', {})
           .then((data) => {
             if(data == null) {
@@ -91,6 +87,8 @@ export class MapPage {
             level: levelId
         });
       }
-
     }
+
+
+
 }

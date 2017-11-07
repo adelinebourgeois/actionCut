@@ -7,7 +7,7 @@
   </div>
   <ion-grid>
       <ion-row id="map" *ngIf="levelsId" justify-content-start>
-          <ion-col col-3 *ngFor="let levelId of levelsId | reverse; let i = index" (tap)="toggleState(); showGame(levelId.levelId, levelId.status)" fixed>
+          <ion-col col-3 *ngFor="let levelId of levelsId" (tap)="showGame(levelId.levelId, levelId.status)" fixed>
               <div class="bloc-popcorn" [ngClass]="(levelId.status == 0) ? 'disable' : 'able'">
                   <p>{{ levelId.levelId }}</p>
               </div>

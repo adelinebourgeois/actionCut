@@ -58,6 +58,7 @@ export class GameOnePage {
 
   // display question on game page
   public displayQuestion() {
+      this.question = '';
       this.db.executeSql('SELECT question FROM `Niveaux` WHERE IdNiveaux ='+this.levels, {})
           .then((data) => {
             if(data == null) {
@@ -76,7 +77,7 @@ export class GameOnePage {
 
   // display the response of the question
   public displayResponses() {
-
+      this.reponses = [];
       this.db.executeSql('SELECT reponse, state FROM `Reponses` CROSS JOIN `Niveaux` ON Reponses.niveauId=Niveaux.IdNiveaux WHERE Niveaux.IdNiveaux ='+this.levels, {})
 
           .then((data) => {

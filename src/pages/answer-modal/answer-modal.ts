@@ -74,9 +74,9 @@ export class AnswerModalPage {
           .catch( e => console.log(e));
     }
 
-    public updateStatus () {
-        this.db.executeSql('UPDATE Niveaux SET status = 1 WHERE IdNiveaux ='+ this.levels++, {})
-            .then(() => console.log('UPDATE : ' + this.levels++ + 'car j\'ai fait le level ' + this.levels ))
+    public updateStatus (levelUp) {
+        this.db.executeSql('UPDATE Niveaux SET status = 1 WHERE IdNiveaux ='+ levelUp, {})
+            .then(() => console.log('UPDATE : ' + levelUp + 'car j\'ai fait le level ' + this.levels ))
             .catch(e => console.log(e))
     }
 
@@ -89,10 +89,12 @@ export class AnswerModalPage {
     }
 
     public nextButton() {
-        this.updateStatus();
-        console.log('Je passe au niveau suivant : ' + this.levels++ + ' car j\'ai terminé le niveau ' + this.levels);
+        let updateLevel = this.levels+1;
+        console.log('updateLevel : ' + updateLevel)
+        this.updateStatus(updateLevel);
+        console.log('Je passe au niveau suivant : ' + updateLevel + ' car j\'ai terminé le niveau ' + this.levels);
         this.navCtrl.push( GameOnePage, {
-            level: this.levels++,
+            level: updateLevel,
         });
     }
 
