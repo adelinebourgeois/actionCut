@@ -35,7 +35,7 @@
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-file": "^4.3.3",
-    "cordova-plugin-ionic-webview": "^1.1.11",
+    "cordova-plugin-ionic-webview": "^2.2.0",
     "cordova-plugin-media": "^3.0.1",
     "cordova-plugin-nativestorage": "^2.2.2",
     "cordova-plugin-splashscreen": "^4.0.3",
